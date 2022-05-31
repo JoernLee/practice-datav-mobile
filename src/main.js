@@ -2,9 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueRouter from 'vue-router'
-import './styles/reset.css'
 import ECharts from 'echarts';
 import VueECharts from 'vue-echarts';
+// 要改到引入vue-echarts之后，这个时候才能覆盖掉.echarts样式
+import './styles/reset.css'
+
 
 Vue.use(VueRouter)
 
