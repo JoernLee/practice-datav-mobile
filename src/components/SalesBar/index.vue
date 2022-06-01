@@ -27,10 +27,18 @@ export default {
         },
         top: 10
       },
+      tooltip: {
+        // tooltip直接展示坐标轴信息并且交互带有阴影
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
       grid: {
         left: '10%',
         right: '4%',
-        bottom: '3%'
+        bottom: '3%',
+        containLabel: true
       },
       xAxis: {
         type: 'value',

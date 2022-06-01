@@ -5,6 +5,7 @@
       <div class="datav-wrapper"/>
       <top-header/>
       <sales-bar/>
+      <sales-line/>
     </div>
   </div>
 </template>
@@ -12,10 +13,11 @@
 <script>
 import TopHeader from "@/components/TopHeader";
 import SalesBar from "@/components/SalesBar";
+import SalesLine from "@/components/SalesLine";
 
 export default {
   name: "Home",
-  components: {SalesBar, TopHeader},
+  components: {SalesLine, SalesBar, TopHeader},
   data() {
     return {
       options: {}
