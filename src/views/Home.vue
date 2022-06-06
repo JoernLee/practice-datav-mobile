@@ -7,6 +7,7 @@
       <sales-bar/>
       <sales-line/>
       <sales-pie/>
+      <sales-map/>
     </div>
   </div>
 </template>
@@ -16,10 +17,11 @@ import TopHeader from "@/components/TopHeader";
 import SalesBar from "@/components/SalesBar";
 import SalesLine from "@/components/SalesLine";
 import SalesPie from "@/components/SalesPie";
+import SalesMap from "@/components/SalesMap";
 
 export default {
   name: "Home",
-  components: {SalesPie, SalesLine, SalesBar, TopHeader},
+  components: {SalesMap, SalesPie, SalesLine, SalesBar, TopHeader},
   data() {
     return {
       options: {}
