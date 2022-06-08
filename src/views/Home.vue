@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="!loading">
     <div class="echarts-wrapper">
       <!-- 画布背景 -->
       <div class="datav-wrapper"/>
@@ -12,6 +12,11 @@
       <sales-radar/>
     </div>
   </div>
+  <div class="home" v-else>
+    <div class="loading-wrapper">
+      {{ loadingText }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,31 +27,36 @@ import SalesPie from "@/components/SalesPie";
 import SalesMap from "@/components/SalesMap";
 import SalesSun from "@/components/SalesSun";
 import SalesRadar from "@/components/SalesRadar";
+import {getMobileData} from '@/api';
 
 export default {
   name: "Home",
   components: {SalesRadar, SalesSun, SalesMap, SalesPie, SalesLine, SalesBar, TopHeader},
   data() {
     return {
-      options: {}
+      loading: true,
+      loadingText: '加载中',
+      data: null
     }
   },
   mounted() {
-    this.options = {
-      title: {
-        text: '入门示例'
-      },
-      tooltip: {},
-      xAxis: {
-        data: ['衣服', '裤子']
-      },
-      yAxis: {},
-      series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20]
-      }]
-    }
+    this.task && clearInterval(this.task);
+    this.task = setInterval(() => {
+      // 制作动画效果:...变化
+      if (this.loadingText === '加载中...') {
+        this.loadingText = '加载中';
+      } else {
+        this.loadingText += '.';
+      }
+    }, 300);
+    getMobileData().then(data => {
+      this.loading = false;
+      this.task && clearInterval(this.task);
+      this.data = data;
+    }).catch(() => {
+      this.loading = false;
+      this.data = null;
+    });
   }
 }
 </script>
@@ -65,6 +75,16 @@ export default {
     z-index: 1;
     background-image: url("//www.youbaobao.xyz/datav-res/datav/datav-mobile-bg.jpg");
     background-size: 100% 100%;
+  }
+
+  .loading-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #fff;
   }
 
 }
