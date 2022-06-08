@@ -9,6 +9,7 @@
       <sales-pie/>
       <sales-map/>
       <sales-sun/>
+      <sales-radar/>
     </div>
   </div>
 </template>
@@ -20,10 +21,11 @@ import SalesLine from "@/components/SalesLine";
 import SalesPie from "@/components/SalesPie";
 import SalesMap from "@/components/SalesMap";
 import SalesSun from "@/components/SalesSun";
+import SalesRadar from "@/components/SalesRadar";
 
 export default {
   name: "Home",
-  components: {SalesSun, SalesMap, SalesPie, SalesLine, SalesBar, TopHeader},
+  components: {SalesRadar, SalesSun, SalesMap, SalesPie, SalesLine, SalesBar, TopHeader},
   data() {
     return {
       options: {}
