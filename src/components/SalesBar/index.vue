@@ -9,78 +9,87 @@
 <script>
 export default {
   name: "SalesBar",
+  props:{
+    data:Object
+  },
   data() {
     return {
       options: {}
     }
   },
-  mounted() {
-    const axis = ['南京', '深圳', '杭州', '上海', '北京', '全国'];
-    // 两个柱状图
-    const data1 = ['68203', '73489', '79034', '204970', '231744', '630230'];
-    const data2 = ['49325', '53468', '61000', '221594', '234141', '681807'];
-    this.options = {
-      title: {
-        text: '今日销售额： 253,089.10元',
-        textStyle: {
-          color: '#fff'
-        },
-        top: 10
-      },
-      tooltip: {
-        // tooltip直接展示坐标轴信息并且交互带有阴影
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      grid: {
-        left: '10%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: {
-        type: 'value',
-        axisLabel: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          show: false
-        },
-        splitLine: {
-          lineStyle: {
-            color: 'rgba(255, 255, 255, 0.1)'
-          }
-        }
-
-      },
-      yAxis: {
-        type: 'category',
-        data: axis,
-        axisLabel: {
-          color: '#fff'
-        }
-      },
-      series: [
-        {
-          name: '平台流量',
-          type: 'bar',
-          data: data1
-        },
-        {
-          name: '外部流量',
-          type: 'bar',
-          data: data2,
-          itemStyle: {
-            color: 'rgb(0, 140, 217)'
-          }
-        }
-      ]
+  watch: {
+    data() {
+      this.update();
     }
+  },
+  methods: {
+    update() {
+      if (this?.data?.salesBar) {
+        const {axis, data1, data2} = this.data.salesBar;
+        this.options = {
+          title: {
+            text: '今日销售额： 253,089.10元',
+            textStyle: {
+              color: '#fff'
+            },
+            top: 10
+          },
+          tooltip: {
+            // tooltip直接展示坐标轴信息并且交互带有阴影
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          grid: {
+            left: '10%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            axisLabel: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              }
+            }
+
+          },
+          yAxis: {
+            type: 'category',
+            data: axis,
+            axisLabel: {
+              color: '#fff'
+            }
+          },
+          series: [
+            {
+              name: '平台流量',
+              type: 'bar',
+              data: data1
+            },
+            {
+              name: '外部流量',
+              type: 'bar',
+              data: data2,
+              itemStyle: {
+                color: 'rgb(0, 140, 217)'
+              }
+            }
+          ]
+        }
+      }
+    },
   }
 }
 </script>

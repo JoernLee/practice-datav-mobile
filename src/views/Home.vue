@@ -4,7 +4,7 @@
       <!-- 画布背景 -->
       <div class="datav-wrapper"/>
       <top-header/>
-      <sales-bar/>
+      <sales-bar :data="data"/>
       <sales-line/>
       <sales-pie/>
       <sales-map/>
@@ -52,7 +52,10 @@ export default {
     getMobileData().then(data => {
       this.loading = false;
       this.task && clearInterval(this.task);
-      this.data = data;
+      this.$nextTick(() => {
+        // 等待组件更新完之后在执行赋值
+        this.data = data;
+      });
     }).catch(() => {
       this.loading = false;
       this.data = null;
